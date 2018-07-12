@@ -1,0 +1,17 @@
+@import url('https://fonts.googleapis.com/css?family=Overlock');
+
+.fab-button {
+    position: fixed;
+    right: 5em;
+    bottom: 2em;
+}
+
+.dialog {
+    width: auto;
+}
+
+.order-form {
+    margin: 1em;
+    text-align: center;
+    font-family: 'Overlock', cursive;
+}

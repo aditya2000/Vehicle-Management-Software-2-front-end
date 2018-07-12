@@ -1,0 +1,9 @@
+@import url('https://fonts.googleapis.com/css?family=Overlock');
+
+
+.card {
+    margin: 2em;
+    width: auto;
+    height: auto;
+    font-family: 'Overlock', cursive;
+}
