@@ -51,10 +51,14 @@ class FormDialog extends Component {
                                 </FormControl> 
                             </Grid>
                             <Grid item xs={6}>
-                                <FormControl fullWidth >
-                                    <InputLabel htmlFor="adornment-amount">Date of Loading</InputLabel>
-                                    <Input/>
-                                </FormControl> 
+                            <TextField
+                                id="date"
+                                label="Date of Loading"
+                                type="date"
+                                InputLabelProps={{
+                                    shrink: true,
+                                  }}
+                                />
                             </Grid>
                             <Grid item xs={6}>
                                 <FormControl fullWidth >
