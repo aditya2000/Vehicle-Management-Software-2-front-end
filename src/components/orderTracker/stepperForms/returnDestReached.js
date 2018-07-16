@@ -6,18 +6,23 @@ import TextField from '@material-ui/core/TextField';
 
 
 class ReturnDestReached extends Component {
-    state = {
-        payment: '',
-        pud: '',
+    constructor() {
+        super();
+        this.handleSubmit = this.handleSubmit.bind(this);
+    }
+
+    handleSubmit(e) {
+        e.preventDefautlt();
+        this.props.onSubmit();
     }
 
     render() {
         return(
-            <div>
-                <TextField name="payment" label='Payment'></TextField><br/><br/>
+            <form onSubmit={this.handleSubmit}>
+                <TextField name="returnPayment" label='Payment' value={this.props.returnPayment} onChange={this.props.onChangeReturnPayment}></TextField><br/><br/>
                 {/*TODO: Add opload*/}
                 <Button variant='contained' color="primary">Submit</Button><br/><br/>
-            </div>
+            </form>
         )
     }
 }

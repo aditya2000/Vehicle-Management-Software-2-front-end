@@ -6,20 +6,23 @@ import TextField from '@material-ui/core/TextField';
 
 
 class OrderConfirmationForm extends Component {
-    state = {
-        broker: '',
-        brokerProfit: '',
-        bill:''
+    constructor() {
+        super();
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
+    handleSubmit(e) {
+        e.preventDefautlt();
+        this.props.onSubmit();
+    }
     render() {
         return(
-            <div>
-                <TextField name="broker" label='Broker'></TextField><br />
-                <TextField name="brokerProfit" label="Broker Profit"></TextField><br/><br/>
+            <form onSubmit={this.handleSubmit}>
+                <TextField name="broker" label='Broker' value={this.props.broker} onChange={this.props.onChangeBroker}></TextField><br />
+                <TextField name="brokerProfit" label="Broker Profit" value={this.props.brokerName} onChange={this.props.onChangeBrokerProfit}></TextField><br/><br/>
                 {/*TODO: Uploading for Bills*/}
                 <Button variant='contained' color="primary">Submit</Button><br /><br/>
-            </div>
+            </form>
         )
     }
 }

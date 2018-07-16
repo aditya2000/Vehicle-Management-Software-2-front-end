@@ -16,41 +16,178 @@ import ReachedHQForm from './stepperForms/reachedHQForm';
 import FrontDestReachedForm from './stepperForms/frontDestReachedForm';
 import LoadingForReturn from './stepperForms/loadingForReturn';
 import ReturnDestReached from './stepperForms/returnDestReached';
-import { getItems } from '../../actions/itemActions';
+import { connect } from 'react-redux';
+import { getSteps, addStep } from '../../actions/stepActions';
 
 
-function getSteps() {
+function getsSteps() {
     return ['Order Confirmed', 'Reached HQ', 'Front Destination Reached', 'Loading For Return', 'Return Destination Reached'];
   }
   
-  function getStepContent(step) {
+  /*function getStepContent(step) {
     switch (step) {
       case 0:
-        return <OrderConfirmationForm />;
+        return <OrderConfirmationForm 
+          key="orderConfirmationForm"
+          onSubmit={this.handleNext}
+          broker={this.state.broker}
+          brokerProfit={this.state.brokerProfit}
+          onChangeBroker={this.handleChange('broker')}
+          onChangeBrokerProfit={this.handleChange('brokerProfit')}
+        />;
       case 1:
-        return <ReachedHQForm/>;
+        return <ReachedHQForm
+        key="reachedHQForm"
+        onSubmit={this.handleNext}
+        fuel={this.state.fuel}
+        petrolPump={this.state.petrolPump}
+        advance={this.state.advance}
+        onChangeFuel={this.handleChange('fuel')}
+        onChangePetrolPump={this.handleChange('petrolPump')}
+        onChangeAdvance={this.handleChange('advance')}
+        />;
       case 2:
-        return <FrontDestReachedForm/>;
+        return <FrontDestReachedForm
+        key="frontDestReachedForm"
+        payment={this.state.payment}
+        onChangePayment={this.handleChange('payment')}
+        />;
       case 3: 
-        return <LoadingForReturn />;
+        return <LoadingForReturn 
+        key="loadingForReturn"
+        returnBroker={this.state.returnBroker}
+        returnBrokerProfit={this.state.returnBrokerProfit}
+        typeOfLoad={this.state.typeOfLoad}
+        returnFuel={this.state.returnFuel}
+        returnAdvance={this.state.returnAdvance}
+        onChangeReturnBroker={this.handleChange('returnBroker')}
+        onChangeReturnBrokerProfit={this.handleChange('returnBrokerProfit')}
+        onChangeTypeOfLoad={this.handleChange('typeOfLoad')}
+        onChangeReturnFuel={this.handleChange('returnFuel')}
+        onChangeReturnAdvance={this.handleChange('returnAdvance')}
+        />;
       case 4: 
-        return <ReturnDestReached />;
+        return <ReturnDestReached
+        key="returnDestReached"
+        returnPayment={this.state.returnPayment}
+        onChangeReturnPayment={this.handleChange('returnPayment')}
+        />;
       default:
         return 'Unknown step';
     }
   }
-
+*/
   
 
   class VerticalLinearStepper extends React.Component {
-    state = {
-      activeStep: 0,
-    };
-  
+    constructor(){
+      super();
+      this.state = {
+        activeStep: 0,
+
+        //orderNumber: this.props.orderNumber,
+        
+        broker: '',
+        brokerProfit: null,
+
+        fuel: null,
+        petrolPump: '',
+        advance: null,
+
+        payment: null,
+
+        returnBroker: '',
+        returnBrokerProfit: null,
+        typeOfLoad: '',
+        returnFuel: null,
+        returnAdvance: null,
+
+        returnPayment: null
+      };
+      this.handleNext = this.handleNext.bind(this);
+    }
+
+    componentDidMount() {
+      this.props.getSteps();
+    }
+
+    getStepContent(step) {
+      switch (step) {
+        case 0:
+          return <OrderConfirmationForm 
+            key="orderConfirmationForm"
+            onSubmit={this.handleNext}
+            broker={this.state.broker}
+            brokerProfit={this.state.brokerProfit}
+            onChangeBroker={this.handleChange('broker')}
+            onChangeBrokerProfit={this.handleChange('brokerProfit')}
+          />;
+        case 1:
+          return <ReachedHQForm
+          key="reachedHQForm"
+          onSubmit={this.handleNext}
+          fuel={this.state.fuel}
+          petrolPump={this.state.petrolPump}
+          advance={this.state.advance}
+          onChangeFuel={this.handleChange('fuel')}
+          onChangePetrolPump={this.handleChange('petrolPump')}
+          onChangeAdvance={this.handleChange('advance')}
+          />;
+        case 2:
+          return <FrontDestReachedForm
+          key="frontDestReachedForm"
+          payment={this.state.payment}
+          onChangePayment={this.handleChange('payment')}
+          />;
+        case 3: 
+          return <LoadingForReturn 
+          key="loadingForReturn"
+          returnBroker={this.state.returnBroker}
+          returnBrokerProfit={this.state.returnBrokerProfit}
+          typeOfLoad={this.state.typeOfLoad}
+          returnFuel={this.state.returnFuel}
+          returnAdvance={this.state.returnAdvance}
+          onChangeReturnBroker={this.handleChange('returnBroker')}
+          onChangeReturnBrokerProfit={this.handleChange('returnBrokerProfit')}
+          onChangeTypeOfLoad={this.handleChange('typeOfLoad')}
+          onChangeReturnFuel={this.handleChange('returnFuel')}
+          onChangeReturnAdvance={this.handleChange('returnAdvance')}
+          />;
+        case 4: 
+          return <ReturnDestReached
+          key="returnDestReached"
+          returnPayment={this.state.returnPayment}
+          onChangeReturnPayment={this.handleChange('returnPayment')}
+          />;
+        default:
+          return 'Unknown step';
+      }
+    }
+
     handleNext = () => {
+      
       this.setState(state => ({
         activeStep: state.activeStep + 1,
       }));
+    
+      const stepValues = {
+        orderNumber: this.props.orderNumber,
+        broker: this.state.broker,
+        brokerProfit: this.state.brokerProfit,
+        fuel: this.state.fuel,
+        petrolPump: this.state.petrolPump,
+        advance: this.state.advance,
+        payment: this.state.payment,
+        returnBroker: this.state.returnBroker,
+        returnBrokerProfit: this.state.returnBrokerProfit,
+        typeOfLoad: this.state.typeOfLoad,
+        returnFuel: this.state.returnFuel,
+        returnAdvance: this.state.returnAdvance,
+        returnPayment: this.state.returnPayment
+      }
+      //TODO: call to backend
+      this.props.addStep(stepValues);
+    
     };
   
     handleBack = () => {
@@ -64,11 +201,15 @@ function getSteps() {
         activeStep: 0,
       });
     };
+
+    handleChange(field) {
+      return(e) => this.setState({[field]: e.target.value});
+    }
   
     render() {
-      const steps = getSteps();
+      const steps = getsSteps();
       const { activeStep } = this.state;
-  
+      const {stepsList} = this.props.steps;
       return (
         <div>
         <Grid container>
@@ -79,7 +220,7 @@ function getSteps() {
                 <Step key={label}>
                   <StepLabel>{label}</StepLabel>
                   <StepContent>
-                    <div>{getStepContent(index)}</div>
+                    <div>{this.getStepContent(index)}</div>
                     <div>
                       <div>
                         <Button
@@ -108,15 +249,17 @@ function getSteps() {
               <Button onClick={this.handleReset}>
                 Reset
               </Button>
+              <Button variant="contained" color="primary">Preview</Button>
             </Paper>
           )}
           </Grid>
           {
              activeStep > 0 && (
             <Grid item xs={6}>
-              <OrderTrackInfo activeStep={activeStep}/>
+              <OrderTrackInfo activeStep={activeStep} activeStepName={getsSteps(activeStep)} step={stepsList.filter(step => step.orderNumber === this.props.orderNumber)}/>
             </Grid>
             )
+            
           }
 
           </Grid>
@@ -126,5 +269,12 @@ function getSteps() {
   }
   
 
+VerticalLinearStepper.propTypes = {
+    getSteps: PropTypes.func.isRequired,
+    steps: PropTypes.object.isRequired
+}
+const mapStateToProps = (state) => ({
+    steps: state.steps
+});
   
-  export default VerticalLinearStepper;
+export default connect(mapStateToProps, {getSteps, addStep})(VerticalLinearStepper);

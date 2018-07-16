@@ -62,7 +62,7 @@ class DashCard extends Component {
                         </Grid>
                         <Grid container>
                             <Grid item xs={12}>
-                                <FullScreenDialog /><br /><br/>
+                                <FullScreenDialog orderNumber={this.props.itemOrder.orderNumber}/><br /><br/>
                                 <Button variant="outlined" color="secondary" onClick={this.onDeleteClick.bind(this, this.props.itemOrder.orderNumber)}>Delete</Button>
                             </Grid>
                         </Grid>

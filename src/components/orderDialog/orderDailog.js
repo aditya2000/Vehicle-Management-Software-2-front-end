@@ -57,7 +57,7 @@ function Transition(props) {
               </Toolbar>
             </AppBar>
             <br/><br/><br/><br/>
-            <VerticalLinearStepper/>
+            <VerticalLinearStepper orderNumber={this.props.orderNumber}/>
                 
           </Dialog>
         </div>

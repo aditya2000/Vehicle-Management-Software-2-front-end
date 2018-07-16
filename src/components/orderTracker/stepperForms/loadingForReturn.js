@@ -6,26 +6,27 @@ import TextField from '@material-ui/core/TextField';
 
 
 class LoadingForReturn extends Component {
-    state = {
-        broker: '',
-        brokerProfit: '',
-        typeOfLoad: '',
-        fuel: '',
-        advance: '',
-        bill: '',
+    constructor() {
+        super();
+        this.handleSubmit = this.handleSubmit.bind(this);
+    }
+
+    handleSubmit(e) {
+        e.preventDefautlt();
+        this.props.onSubmit();
     }
 
     render() {
         return(
-            <div>
-                <TextField name="broker" label='Broker'></TextField><br/>
-                <TextField name="brokerProfit" label='Broker Profit'></TextField><br />
-                <TextField name="typeOfLoad" label='Type Of Load'></TextField><br />
-                <TextField name="fuel" label='Fuel'></TextField><br />
-                <TextField name="advance" label='Advance'></TextField><br /><br/>
+            <form onSubmit={this.handleSubmit}>
+                <TextField name="returnBroker" label='Broker' value={this.props.returnBroker} onChange={this.props.onChangeReturnBroker}></TextField><br/>
+                <TextField name="returnBrokerProfit" label='Broker Profit' value={this.props.returnBrokerProfit} onChange={this.props.onChangeReturnBrokerProfit}></TextField><br />
+                <TextField name="typeOfLoad" label='Type Of Load' value={this.props.typeOfLoad} onChange={this.props.onChangeTypeOfLoad}></TextField><br />
+                <TextField name="returnFuel" label='Fuel' value={this.props.returnFuel} onChange={this.props.onChangeReturnFuel}></TextField><br />
+                <TextField name="returnAdvance" label='Advance' value={this.props.returnAdvance} onChange={this.props.onChangeReturnAdvance}></TextField><br /><br/>
                 {/*TODO: Add opload*/}
                 <Button variant='contained' color="primary">Submit</Button><br/><br/>
-            </div>
+            </form>
         )
     }
 }

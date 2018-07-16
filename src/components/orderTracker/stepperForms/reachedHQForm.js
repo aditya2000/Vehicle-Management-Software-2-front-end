@@ -6,20 +6,24 @@ import TextField from '@material-ui/core/TextField';
 
 
 class ReachedHQForm extends Component {
-    state = {
-        fuel: '',
-        petrolPump: '',
-        advance:''
+    constructor(){
+        super();
+        this.handleSubmit = this.handleSubmit.bind(this);
+    }
+
+    handleSubmit(e) {
+        e.preventDefault();
+        this.props.onSubmit();
     }
 
     render() {
         return(
-            <div>
-                <TextField name="fuel" label='Fuel'></TextField><br />
-                <TextField name="petrolPump" label="Petrol Pump"></TextField><br />
-                <TextField name="advance" label="Advance"></TextField><br/><br/>
+            <form onSubmit={this.handleSubmit}>
+                <TextField name="fuel" label='Fuel' value={this.props.fuel} onChange={this.props.onChangeFuel}></TextField><br />
+                <TextField name="petrolPump" label="Petrol Pump" value={this.props.petrolPump} onChange={this.props.onChangePetrolPump}></TextField><br />
+                <TextField name="advance" label="Advance" value={this.props.advance} onChange={this.props.onChangeAdvance}></TextField><br/><br/>
                 <Button variant='contained' color="primary">Submit</Button><br/><br/>
-            </div>
+            </form>
         )
     }
 }
